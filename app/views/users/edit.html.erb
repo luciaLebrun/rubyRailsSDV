@@ -1,0 +1,24 @@
+<h1>Edit Account</h1>
+<%= form_with model: @user, url: account_path, local: true do |form| %>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <div>
+    <%= form.submit "Update" %>
+  </div>
+<% end %>
+
+<%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger' %>
+
+<% if flash[:alert] %>
+  <p><%= flash[:alert] %></p>
+<% end %>

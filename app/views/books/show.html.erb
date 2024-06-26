@@ -1,0 +1,18 @@
+<h1><%= @book.title %></h1>
+<p>Author: <%= @book.author %></p>
+<p>Published Year: <%= @book.publish_year %></p>
+
+<% if @book.borrows.where(ended_at: nil).exists? %>
+  <p>This book is currently borrowed.</p>
+<% else %>
+  <% if session[:user_id] %>
+    <%= form_with model: Borrow.new, url: borrows_path do |form| %>
+      <%= form.hidden_field :book_id, value: @book.id %>
+      <%= form.submit "Borrow this book" %>
+    <% end %>
+  <% else %>
+    <p><em>You must be logged in to borrow this book.</em></p>
+  <% end %>
+<% end %>
+
+<%= link_to 'Back to Books', books_path %>
